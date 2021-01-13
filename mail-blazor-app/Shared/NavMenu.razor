@@ -1,0 +1,26 @@
+﻿@inherits NavMenuRazor
+
+<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">Mails</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+
+<div @onclick="ToggleNavMenu">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            @foreach (var folder in Folders)
+            {
+                var url = "/getmail/" + @folder.OriginalName;
+                
+                <NavLink class="nav-link blank-link" href="@url"  >
+                    <li class="nav-item ">
+                        <span class="oi oi-list-rich" aria-hidden="true"></span>
+                        @folder.Name
+                    </li>
+                </NavLink>
+            }
+        </ul>
+    </div>
+</div>

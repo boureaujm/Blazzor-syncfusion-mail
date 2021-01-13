@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mail-blazor-app", "mail-blazor-app\mail-blazor-app.csproj", "{78FA0EE6-5C34-43DF-B6AC-EFD65603AA75}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mailBlazzorApp.Library", "mailBlazzorApp.Library\mailBlazzorApp.Library.csproj", "{3FFC7CE4-9197-4BC8-9B1F-5D282E3FFF18}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{78FA0EE6-5C34-43DF-B6AC-EFD65603AA75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78FA0EE6-5C34-43DF-B6AC-EFD65603AA75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78FA0EE6-5C34-43DF-B6AC-EFD65603AA75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78FA0EE6-5C34-43DF-B6AC-EFD65603AA75}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97992250-7D10-4D99-A338-3BA99B3E5EAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97992250-7D10-4D99-A338-3BA99B3E5EAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97992250-7D10-4D99-A338-3BA99B3E5EAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97992250-7D10-4D99-A338-3BA99B3E5EAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77C48685-58AF-47E2-936D-A8FD8A0D5487}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77C48685-58AF-47E2-936D-A8FD8A0D5487}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77C48685-58AF-47E2-936D-A8FD8A0D5487}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77C48685-58AF-47E2-936D-A8FD8A0D5487}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFC7CE4-9197-4BC8-9B1F-5D282E3FFF18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFC7CE4-9197-4BC8-9B1F-5D282E3FFF18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFC7CE4-9197-4BC8-9B1F-5D282E3FFF18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFC7CE4-9197-4BC8-9B1F-5D282E3FFF18}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

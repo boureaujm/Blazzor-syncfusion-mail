@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <LangVersion>9</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AsyncEnumerator" Version="4.0.2" />
+      <PackageReference Include="Mail.dll" Version="3.0.20308.1141" />
+      <PackageReference Include="MediatR" Version="9.0.0" />
+      <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+      <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-rc.2.20475.5" />
+      <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+      <PackageReference Include="RestSharp" Version="106.11.8-alpha.0.4" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="Tools\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="Tools\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Tools\**" />
+    </ItemGroup>
+
+</Project>

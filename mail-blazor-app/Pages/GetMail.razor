@@ -1,0 +1,163 @@
+﻿@page "/getmail"
+@page "/getmail/{FolderName}"
+@inherits InBoxRazor
+
+@using Syncfusion.Blazor.Grids
+@using Syncfusion.Blazor.RichTextEditor
+@using mailBlazzorApp.Library.Dto
+
+
+<div class="control-section" >
+    <div id="button-control">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                <div class="col-xs-12 col-sm-12 col-lg-6 col-md-6">
+                    <SfButton @onclick="ShowModal" IsPrimary="true" onCli>Nouveau</SfButton>
+                    &nbsp;
+                    <SfButton CssClass="e-icons e-delete" @onclick="Delete"></SfButton>
+                    &nbsp;
+                    <SfButton CssClass="e-icons e-refresh" @onclick="Refresh"></SfButton>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-lg-6 col-md-6">
+                &nbsp;
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+
+    @if (Mails == null)
+     {
+         <div style="width: 100%; align-content: center ">
+             <SfSpinner @ref="SpinnerObj" Target="#container"></SfSpinner>
+         </div>
+     }
+     else
+     {
+         <div class="row">
+             <div class="col-md-6">
+                 
+                 <SfGrid @ref="@Grid" DataSource="@Mails" Toolbar="@(new List<string>() { "Search" })" 
+                          AllowSelection="true" AllowSorting="true" AllowFiltering="true" AllowPaging="true"
+                          all
+                          EnableVirtualization="true" EnableHover="false" Height="600" RowHeight="38">
+                     
+                     <GridEvents RowSelected="RowSelecthandler" TValue="Mail"></GridEvents>
+
+                     <GridFilterSettings Type="Syncfusion.Blazor.Grids.FilterType.Menu"></GridFilterSettings>
+                     <GridPageSettings PageSize="10" PageSizes="true"> </GridPageSettings>
+                     <GridSelectionSettings Type="Syncfusion.Blazor.Grids.SelectionType.Single"></GridSelectionSettings>
+                     <GridColumns>
+                         <GridColumn Type="ColumnType.CheckBox" AllowFiltering="false" AllowSorting="false" Width="60"></GridColumn>
+                         <GridColumn Field=@nameof(Mail.Subject) HeaderText="Sujet" IsPrimaryKey="true" Width="130"></GridColumn>
+
+                         <GridColumn Field=@nameof(Mail.Sender) HeaderText="Emetteur" FilterSettings="@(new FilterSettings {Type = Syncfusion.Blazor.Grids.FilterType.Menu})" Format="C2" TextAlign="TextAlign.Right" Width="160"></GridColumn>
+                         <GridColumn Field=@nameof(Mail.Date) HeaderText="Date" FilterSettings="@(new FilterSettings {Type = Syncfusion.Blazor.Grids.FilterType.Menu})" Width="240" ClipMode="ClipMode.EllipsisWithTooltip"></GridColumn>
+                     </GridColumns>
+                 </SfGrid>
+             </div>
+             <div class="col-md-6">
+                 @if (CurrentMail != null)
+                 {
+                     <SfCard ID="Title">
+                         <CardHeader Title="@CurrentMail.Subject"/>
+                     </SfCard>
+                     <SfRichTextEditor @ref="MailContent" @bind-Value="@CurrentMail.Html" ShowCharCount="true" MaxLength="20000">
+                         <ChildContent>
+     
+                             <RichTextEditorToolbarSettings Items="@Tools"/>
+                         </ChildContent>
+                     </SfRichTextEditor>
+                 }
+             </div>
+         </div>
+     } 
+      
+</div>
+<SfToast ID="toast_default" @ref="ToastObj" Timeout="5000" Icon="e-meeting">
+    <ToastPosition X="@ToastPosition"></ToastPosition>
+</SfToast>
+
+<SfDialog Height="60%" Width="700px" Target="#target" ShowCloseIcon="true" @bind-Visible="NewMailVisibility">
+    <DialogTemplates>
+        <Header>
+            <div id="template" title="Nouveau mail" class="e-icon-settings">Nouveau mail</div>
+        </Header>
+        <Content>
+            <div class="dialogContent">
+                <div class="row">
+
+                    <div class="col-md-2 dialogRow">
+                        Sujet
+                    </div>
+                    <div class="col-md-10 dialogRow">
+                        <SfTextBox ID="subject" @bind-Value="@NewMailSubject" @ref="NewMailSubjectObj" Type="Syncfusion.Blazor.Inputs.InputType.Text"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 dialogRow">
+                        Destinataire(s)
+                    </div>
+                    <div class="col-md-10 dialogRow">
+                        <SfTextBox ID="sender" @bind-Value="@NewMailRecipient" @ref="NewMailRecipientObj" Type="Syncfusion.Blazor.Inputs.InputType.Text"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <SfRichTextEditor @ref="NewMailContentObj" ShowCharCount="true" MaxLength="20000"
+                                           Height="250px" Width="600px" EditorMode="EditorMode.HTML">
+                            <ChildContent>
+                                <RichTextEditorInlineMode Enable="true" ShowOnSelection="true"/>
+                                <RichTextEditorToolbarSettings Items="@Tools"/>
+                            </ChildContent>
+                        </SfRichTextEditor>
+                    </div>
+                </div>
+            </div>
+        </Content>
+        <FooterTemplate>
+            <button id="sendButton" @onclick="@SendBtnclicked" class="e-control e-btn e-primary" data-ripple="true">Send</button>
+        </FooterTemplate>
+    </DialogTemplates>
+    <DialogEvents Closed="@NewMailDialogClose"></DialogEvents>
+</SfDialog>
+
+<SfDialog @ref="@Alert" Width="250px" ShowCloseIcon="true" IsModal="true" @bind-Visible="@AlertIsVisible">
+    <DialogTemplates>
+    </DialogTemplates>
+    <DialogButtons>
+        <DialogButton Content="OK" IsPrimary="true" OnClick="@CloseDialog"/>
+    </DialogButtons>
+</SfDialog>
+
+<style>
+    @@font-face {
+        font-family: 'em-icons';
+        src:
+        url(data:application/x-font-ttf;charset=utf-8;base64,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) format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+   
+   .e-icons{
+       font-size: 26px;
+      }
+    .e-delete::before {
+        content: '\e773';
+    }
+    
+    .e-refresh::before{
+    content: '\e710';
+    }
+   
+   .dialogRow {
+       line-height:20px !important;
+       margin-top: 5px;
+       margin-bottom: 5px;
+   }
+   
+</style>
