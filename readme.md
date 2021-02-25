@@ -4,8 +4,7 @@ A simple mail reader build with Blazor and Syncfusion library
 using also :
 + MediatR
 + CQRS pattern
-
-Mail api (https://www.limilabs.com/mail)
++ Mail api (https://www.limilabs.com/mail)
 
 
 # Usage
